@@ -1,0 +1,178 @@
+./odoo:
+  defaults:
+    depth: 1
+  remotes:
+    ocb: https://github.com/OCA/OCB.git
+    odoo: https://github.com/odoo/odoo.git
+    openupgrade: https://github.com/OCA/OpenUpgrade.git
+  target: ocb 13
+  merges:
+    - ocb 13
+
+./server-tools:
+  defaults:
+    depth: 1
+  remotes:
+    origin: https://github.com/OCA/server-tools.git
+  target: origin $ODOO_VERSION
+  merges:
+    - origin 13
+
+./server-auth:
+  defaults:
+    depth: 1
+  remotes:
+    origin: https://github.com/OCA/server-auth.git
+  target: origin $ODOO_VERSION
+  merges:
+    - origin 13
+
+./server-backend:
+  defaults:
+    depth: 1
+  remotes:
+    origin: https://github.com/OCA/server-backend.git
+  target: origin $ODOO_VERSION
+  merges:
+    - origin 13
+
+./server-brand:
+  defaults:
+    depth: 1
+  remotes:
+    origin: https://github.com/OCA/server-brand.git
+  target: origin $ODOO_VERSION
+  merges:
+    - origin 13
+
+./reporting-engine:
+  defaults:
+    depth: 1
+  remotes:
+    origin: https://github.com/OCA/reporting-engine.git
+  target: origin $ODOO_VERSION
+  merges:
+    - origin 13
+
+./queue_job:
+  defaults:
+    depth: 1
+  remotes:
+    origin: https://github.com/OCA/queue_job.git
+  target: origin $ODOO_VERSION
+  merges:
+    - origin 13
+
+./connector:
+  defaults:
+    depth: 1
+  remotes:
+    origin: https://github.com/OCA/connector.git
+  target: origin $ODOO_VERSION
+  merges:
+    - origin 13
+
+./helpdesk:
+  defaults:
+    depth: 1
+  remotes:
+    origin: https://github.com/OCA/helpdesk.git
+  target: origin $ODOO_VERSION
+  merges:
+    - origin 13
+
+./partner-contact:
+  defaults:
+    depth: 1
+  remotes:
+    origin: https://github.com/OCA/partner-contact.git
+  target: origin $ODOO_VERSION
+  merges:
+    - origin 13
+
+./field-service:
+  defaults:
+    depth: 1
+  remotes:
+    origin: https://github.com/OCA/field-service.git
+  target: origin $ODOO_VERSION
+  merges:
+    - origin 13
+
+./community-data-files:
+  defaults:
+    depth: 1
+  remotes:
+    origin: https://github.com/OCA/community-data-files.git
+  target: origin $ODOO_VERSION
+  merges:
+    - origin 13
+
+./web:
+  defaults:
+    depth: 1
+  remotes:
+    origin: https://github.com/OCA/web.git
+  target: origin $ODOO_VERSION
+  merges:
+    - origin 13
+
+server-tools:
+  - auditlog
+  - base_search_fuzzy
+  - module_auto_update
+  - ir_sequence_standard_default
+  - base_time_window
+  - sentry
+server-auth:
+  - auth_session_timeout
+  - auth_totp
+  - auth_user_case_insensitive
+  - password_security
+server-backend:
+  - base_suspend_security
+community-data-files:
+  - base_currency_iso_4217
+queue:
+  - queue_job
+connector:
+  - component
+  - component_event
+  - connector
+server-brand:
+  - display_import_button
+  - remove_odoo_enterprise
+reporting-engine:
+  - report_xlsx
+  - report_xlsx_helper
+helpdesk:
+  - helpdesk_mgmt
+  - helpdesk_mgmt_project
+  - helpdesk_type
+field-service:
+  - fieldservice
+  - fieldservice_activity
+  - fieldservice_recurring
+  - base_territory
+partner-contact:
+  - partner_firstname
+  - partner_contact_birthdate
+  - partner_contact_gender
+  - partner_contact_lang
+  - partner_identification
+  - partner_ref_unique
+web:
+  - web_action_conditionable
+  - web_domain_field
+  - web_ir_actions_act_view_reload
+  - web_ir_actions_act_multi
+  - web_advanced_search
+  - web_edit_user_filter
+  - web_export_view
+  - web_ir_actions_act_window_message
+  - web_listview_range_select
+  - web_m2x_options
+  - web_notify
+  - web_ir_actions_close_wizard_refresh_view
+  - web_responsive
+
