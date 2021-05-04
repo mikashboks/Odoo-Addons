@@ -344,7 +344,7 @@ class MapChild(AbstractComponent):
     def _child_mapper(self):
         raise NotImplementedError
 
-    def skip_item(self, map_record):
+    def skip_item(self, parent, map_record, options=None):
         """ Hook to implement in sub-classes when some child
         records should be skipped.
 
@@ -371,14 +371,14 @@ class MapChild(AbstractComponent):
         """
         mapper = self._child_mapper()
         mapped = []
-        for item in items:
+        for item in items or []:
             map_record = mapper.map_record(item, parent=parent)
-            if self.skip_item(map_record):
+            if self.skip_item(parent, map_record, options=options):
                 continue
             item_values = self.get_item_values(map_record, to_attr, options)
             if item_values:
                 mapped.append(item_values)
-        return self.format_items(mapped)
+        return self.format_items(parent, mapped, options=options)
 
     def get_item_values(self, map_record, to_attr, options):
         """ Get the raw values from the child Mappers for the items.
@@ -400,7 +400,7 @@ class MapChild(AbstractComponent):
         """
         return map_record.values(**options)
 
-    def format_items(self, items_values):
+    def format_items(self, parent, items_values, options=None):
         """ Format the values of the items mapped from the child Mappers.
 
         It can be overridden for instance to add the Odoo
@@ -428,7 +428,7 @@ class ImportMapChild(AbstractComponent):
     def _child_mapper(self):
         return self.component(usage="import.mapper")
 
-    def format_items(self, items_values):
+    def format_items(self, parent, items_values, options=None):
         """ Format the values of the items mapped from the child Mappers.
 
         It can be overridden for instance to add the Odoo
