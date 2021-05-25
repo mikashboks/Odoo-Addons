@@ -412,7 +412,7 @@ class QueueJobRunner(object):
                 with db.select_jobs("state in %s", (NOT_DONE,)) as cr:
                     _logger.info("checking for not done jobs on db %s", db_name)
                     for job_data in cr:
-                        _logger.info("asking job runner to signal notification for job %s on db %s", job_data.uuid, job_data.db_name)
+                        _logger.info("asking job runner to signal notification for a job")
                         self.channel_manager.notify(db_name, *job_data)
                 _logger.info("queue job runner ready for db %s", db_name)
 
