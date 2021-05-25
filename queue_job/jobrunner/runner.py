@@ -410,7 +410,9 @@ class QueueJobRunner(object):
             if db.has_queue_job:
                 self.db_by_name[db_name] = db
                 with db.select_jobs("state in %s", (NOT_DONE,)) as cr:
+                    _logger.info("checking for not done jobs on db %s", db_name)
                     for job_data in cr:
+                        _logger.info("asking job runner to signal notification for job %s on db %s", job_data.uuid, job_data.db_name)
                         self.channel_manager.notify(db_name, *job_data)
                 _logger.info("queue job runner ready for db %s", db_name)
 
@@ -418,6 +420,7 @@ class QueueJobRunner(object):
         now = _odoo_now()
         for job in self.channel_manager.get_jobs_to_run(now):
             if self._stop:
+                _logger.info("refusing to run job %s on db %s", job.uuid, job.db_name)
                 break
             _logger.info("asking Odoo to run job %s on db %s", job.uuid, job.db_name)
             self.db_by_name[job.db_name].set_job_enqueued(job.uuid)
