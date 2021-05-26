@@ -234,7 +234,6 @@ def _async_http_get(scheme, host, port, user, password, db_name, job_uuid):
                 auth = (user, password)
             # we are not interested in the result, so we set a short timeout
             # but not too short so we trap and log hard configuration errors
-            _logger.debug("Calling %sb", url)
             response = requests.get(url, timeout=1, auth=auth)
 
             # raise_for_status will result in either nothing, a Client Error
@@ -242,7 +241,6 @@ def _async_http_get(scheme, host, port, user, password, db_name, job_uuid):
             # for codes between 500 and 600
             response.raise_for_status()
         except requests.Timeout:
-            _logger.exception("Timeout in GET %s", url)
             set_job_pending()
         except Exception:
             _logger.exception("exception in GET %s", url)
